@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { StatusCodes } from 'http-status-codes'
+import userRepository from "../repositories/user.repository";
 
 const usersRoute = Router()
 
 // Buscar todos os usuários
-usersRoute.get('/users', ( req: Request, res: Response, next: NextFunction ) => {
-    const users = [{ userName: 'Diogo' }]
+usersRoute.get('/users', async ( req: Request, res: Response, next: NextFunction ) => {
+    const users = await userRepository.findAllUsers()
     res.status(StatusCodes.OK).send(users)
 })
 
