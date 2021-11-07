@@ -18,9 +18,10 @@ usersRoute.get('/users/:uuid', async ( req: Request<{ uuid: string }>, res: Resp
 })
 
 // Criar usuário
-usersRoute.post('/users', ( req: Request, res: Response, next: NextFunction ) => {
+usersRoute.post('/users', async ( req: Request, res: Response, next: NextFunction ) => {
     const newUser = req.body
-    res.status(StatusCodes.CREATED).send(newUser)
+    const uuid = await userRepository.create(newUser)
+    res.status(StatusCodes.CREATED).send(uuid)
 })
 
 // Alterar determinado usuário
