@@ -20,6 +20,16 @@ authorizationRoute.post('/token', ( req: Request, res: Response, next: NextFunct
             throw new ForbiddenError('Invalid authentication type')
         }
 
+        const tokenContent = Buffer.from(token, "base64").toString('utf-8')
+
+        const [username, password] = tokenContent.split(':')
+
+        if (!username || password) {
+            throw new ForbiddenError('Unfilled Credentials')
+        }
+
+        console.log(username, password)
+
     } catch (error) {
         next(error)
     }
