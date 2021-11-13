@@ -20,5 +20,5 @@ app.use(errorHandler)
 
 // Inicialização do servidor
 app.listen(3000, () => {
-    console.log("Aplicação executando na porta 3000.")
+    console.log('Application running on port 3000!')
 })
